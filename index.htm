@@ -1,0 +1,64 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="js/jquery.exif.js"></script>
+
+
+
+		<script>
+			function test(){
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', 'img/test4.jpg', true);
+				xhr.responseType = 'arraybuffer';
+				xhr.onload = function(e) {
+				console.log("ss")					
+					var arrayBuffer = this.response;
+			
+					var blob = new Blob([arrayBuffer], {type: "image/jpeg"});
+					
+					$.fileExif(blob,function(exif){
+						console.log(exif);
+						var res = printProperties(exif);
+						$('#res').html(res);
+					});
+				};
+				xhr.send();
+			}
+
+
+			function printProperties(obj) {
+				var properties = '';
+				for (var prop in obj){
+					properties += prop + "=" + obj[prop] + "<br>";
+				}
+				return properties;
+			}
+
+			
+		</script>
+	</head>
+
+
+
+
+	<body>
+		https://amaraimusi.sakura.ne.jp/sample/js/jquery_exif_js/jquery_exif_js.html<br />
+		<br />
+		<br />
+		<br />
+
+		<img src="https://amaraimusi.sakura.ne.jp/sample/js/jquery_exif_js/img/test4.jpg"><br />
+		<div id="res">11</div>
+		<input type="button" onclick="test()">
+	</body>
+
+	<footer>
+
+	</footer>
+
+</html>
